@@ -2,11 +2,11 @@
 
 I work on LLM inference infrastructure: serving engines, kernels, and the systems around them.
 
-### Open-source contributions (under review)
+### Open-source contributions
 
-- **NVIDIA Dynamo** [#16399](https://github.com/ai-dynamo/dynamo/pull/16399): pick a complete tool call when `parallel_tool_calls` is false while streaming (Rust, Chat Completions and Responses APIs)
-- **vLLM** [#56040](https://github.com/vllm-project/vllm/pull/56040): honor an explicit `VLLM_ROCM_USE_AITER_UNIFIED_ATTENTION=0` on AMD RDNA GPUs
-- **SGLang** [#39075](https://github.com/sgl-project/sglang/pull/39075): fail clearly when decode context parallel hits the aiter attention path that returns no LSE
+- **NVIDIA Dynamo** [#16399](https://github.com/ai-dynamo/dynamo/pull/16399): pick a complete tool call when `parallel_tool_calls` is false while streaming (Rust, Chat Completions and Responses APIs). Under review
+- **vLLM** [#56040](https://github.com/vllm-project/vllm/pull/56040): honor an explicit `VLLM_ROCM_USE_AITER_UNIFIED_ATTENTION=0` on AMD RDNA GPUs. Under review
+- **SGLang** [#39075](https://github.com/sgl-project/sglang/pull/39075): traced a decode context parallel crash to the aiter decode path returning no LSE; closed after AMD landed the full fix in [#34432](https://github.com/sgl-project/sglang/pull/34432)
 
 ### Projects
 
