@@ -12,7 +12,7 @@ I work on LLM inference infrastructure: serving engines, kernels, and the system
 
 **Serving and deployment**
 - [vllm-serving-tuning-practice](https://github.com/Thisish3/vllm-serving-tuning-practice): continuous batching throughput, prefix caching TTFT, and decode memory-bandwidth utilization on an RTX 3060 Ti
-- [vllm-k8s-deploy-practice](https://github.com/Thisish3/vllm-k8s-deploy-practice): vLLM on Kubernetes with rolling updates, HPA, and a CI latency regression gate, then real vLLM on an RTX 3060 Ti node (k3s on WSL2, 5 repeated runs within 0.4% of the bare Docker baseline)
+- [vllm-k8s-deploy-practice](https://github.com/Thisish3/vllm-k8s-deploy-practice): vLLM on Kubernetes with rolling updates, HPA, and a CI latency regression gate, then real vLLM on an RTX 3060 Ti node (k3s on WSL2, throughput within 0.4% of bare Docker over 5 repeated runs)
 
 **Agent workloads**
 - [agentic-loop-bottleneck-practice](https://github.com/Thisish3/agentic-loop-bottleneck-practice): real vLLM tool-calling loops; structured decoding reliability, a LangGraph agent profiled with NeMo Agent Toolkit and Nsight Systems, fp16 vs fp8 KV cache
