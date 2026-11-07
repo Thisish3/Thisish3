@@ -1,4 +1,4 @@
-## Hi, I'm Gunhee Lee (이건희)
+## Hi, I'm thisish3
 
 I work on **LLM inference infrastructure**: serving engines, GPU kernels, collective communication, and the systems around them. I like building small versions of real systems, measuring them, and writing down what I find.
 
