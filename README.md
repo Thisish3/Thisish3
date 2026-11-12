@@ -16,15 +16,16 @@ I work on **LLM inference infrastructure**: serving engines, GPU kernels, collec
 
 | Project | What | Status |
 |---|---|---|
-| [**hxccl**](https://github.com/Thisish3/hxccl) | An NCCL/RCCL-style collective library over OpenMPI: ring and recursive-doubling AllReduce, the full CPU-side NCCL/RCCL API (all 12 dtypes incl. software fp16/bf16/fp8, groups, Send/Recv, AlltoAll(v), Split/Shrink), benchmarked against OpenMPI. 78 MPI tests | CPU stages done; GPU IPC path next |
-| **hxgemm** | FP32 SGEMM step by step (naive → coalescing → shared tiling → register tiling → `cp.async` pipeline) against cuBLAS with Nsight Compute evidence, then Tensor Core, INT8/FP8 and a HIP port | Spec and plan done |
-| **ttalkkak** | Pick a Hugging Face model and agent skills, get a measured serving config (vLLM/SGLang) plus agent-readiness checks | Waiting for GPU measurements (private) |
+| [**hxccl**](https://github.com/Thisish3/hxccl) | An NCCL/RCCL-style collective library. The full NCCL API on CPU buffers (12 dtypes incl. software fp16/bf16/fp8, groups, Send/Recv, AlltoAll(v)), then GPU buffers over CUDA IPC (bit-identical to the CPU path), a `torch.distributed` backend, and an MPI-free socket bootstrap so it runs under `torchrun`. Nsight Systems/Compute breakdowns of where the time goes. [Dev log, 4 posts (Korean)](https://thisish3.tistory.com/category/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/hxccl) | [v0.2](https://github.com/Thisish3/hxccl/tree/v0.2): B (GPU), C (PyTorch), E part 1 (sockets) done |
+| [**hxgemm**](https://github.com/Thisish3/hxgemm) | FP32 SGEMM step by step (naive → coalescing → shared tiling → register tiling → `cp.async` pipeline) on an RTX 3060 Ti, each step backed by Nsight Compute: 109 → 8,775 GFLOPS, **94.4% of cuBLAS**. [Blog, 4 posts (Korean)](https://thisish3.tistory.com/category/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/hxgemm) | G1 (FP32) done; Tensor Core, INT8/FP8 and a HIP port next |
+| **ttalkkak** | An AI infrastructure software stack an inference-chip vendor could ship with its chip, so a cloud provider can run an AI agent service on it: gateway (Envoy AI Gateway + llm-d + vLLM), tenants and API keys, browser login, power-based token cost and billing, operator console, terminal agent for end users | Implemented and unit-tested; end-to-end validation on real GPU in progress (private) |
 
 ### Open-source contributions
 
 | Project | PR | Status |
 |---|---|---|
 | llm-d router | [#3828](https://github.com/llm-d/llm-d-router/pull/3828) use the event offset to keep repeated multimodal items in many:1 KV-event realignment | Merged |
+| llm-d router | [#4138](https://github.com/llm-d/llm-d-router/pull/4138) keep the cache salt after later multimodal items (by another contributor) | Merged; I ran my differential harness from #3811 on it to confirm the 8 failing salt + multimodal cases were gone |
 | NVIDIA Dynamo frontend | [#477](https://github.com/ai-dynamo/frontend-crates/pull/477) strip a force-reasoning `<think>` that follows text in one chunk | Merged |
 | NVIDIA Dynamo frontend | [#481](https://github.com/ai-dynamo/frontend-crates/pull/481) hold back a partial force-reasoning start tag after a prefix | Merged |
 | NVIDIA Dynamo frontend | [#482](https://github.com/ai-dynamo/frontend-crates/pull/482) extend the unified chunk-invariance conformance test | Merged |
