@@ -12,6 +12,8 @@ I work on **LLM inference infrastructure**: serving engines, GPU kernels, collec
 ![Triton](https://img.shields.io/badge/Triton-555555?style=flat-square)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
 
+<p align="center"><img src="stack.png" alt="Where my work sits in the LLM serving stack: ttalkkak at agents and gateway, llm-d router and NVIDIA Dynamo contributions in routing and parsing, SGLang and vLLM at engines, hxgemm at kernels, hxccl at collective communication" width="860"></p>
+
 ### Building now
 
 | Project | What | Status |
